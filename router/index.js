@@ -1,8 +1,12 @@
-import express from "express"
-import userService from "../service/userService.js"
- const userRouters=express.Router()
+import userRouters from "./userRoute/index.js"
+import codeRouters from "./verification/index.js"
 
- //新增用户api
- userRouters.post("/user/add",userService.addUser)
-
- export default userRouters
+const route=(app)=>{
+    /**
+     * 注册路由
+     */
+    app.use("/api",userRouters);   // 处理用户路由
+    app.use("/code",codeRouters)  //获取验证码
+   
+}
+export default  route
