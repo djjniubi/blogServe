@@ -3,7 +3,11 @@ import mongoose from "mongoose";
 const UserType={
     username:String,
     password:String,
-    identity:Number
+    identity:Number,
+    avatar:{
+        type:String,
+        default:""
+    }
 }
 const schema = mongoose.Schema
 const UserModel=mongoose.model("user",new schema(UserType))
