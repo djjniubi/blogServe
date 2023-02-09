@@ -47,6 +47,16 @@ const userController = {
       return ""
     }
   },
+  userUpdate:async(id,username,password)=>{
+     if(!password&&username){
+      await UserModel.updateOne({_id:id},{username})
+    }else if(password&&username){
+      const newpwd = setPassword(password);
+       await UserModel.updateOne({_id:id},{username,password:newpwd})
+    }
+
+    
+  }
 };
 
 export default userController;

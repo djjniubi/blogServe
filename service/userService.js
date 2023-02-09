@@ -23,6 +23,12 @@ const userService = {
             code:200,
             data:data
            })
+      },
+      //修改用户
+      userUpdate:async(req,res)=>{
+        const {id,username,password} =req.body
+        await userController.userUpdate(id,username,password)
+        res.send("更新成功")
       }
 }
 
