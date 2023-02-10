@@ -54,7 +54,10 @@ const userController = {
       const newpwd = setPassword(password);
        await UserModel.updateOne({_id:id},{username,password:newpwd})
     }
-
+  },
+  userDelete:async (id)=>{
+    await UserModel.deleteOne({_id:id})
+    return "删除成功"
     
   }
 };

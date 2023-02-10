@@ -21,3 +21,11 @@ export const verifyUpdate=async(req,res,next)=>{
      }
 
 }
+
+export const verifyDelete=async (req,res,next)=>{
+    const {id}=req.params
+    if(id){
+       const data = await UserModel.find({_id:id})
+        data.length==0? res.send("删除失败!"):data[0].identity==0? res.send("不能删除超级管理员"):next()
+    }
+}

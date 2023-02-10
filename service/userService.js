@@ -29,6 +29,16 @@ const userService = {
         const {id,username,password} =req.body
         await userController.userUpdate(id,username,password)
         res.send("更新成功")
+      },
+
+      //删除用户
+      userDelete:async (req,res)=>{
+        const {id} =req.params
+        const data= await userController.userDelete(id)
+        res.json({
+          code:200,
+          data:data
+        })
       }
 }
 
