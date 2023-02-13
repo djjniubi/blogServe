@@ -15,11 +15,11 @@ export const verifyUserId=(req,res,next)=>{
 
 export const verifyUpdate=async(req,res,next)=>{
     const {id}=req.body
+    console.log("verifyUpdate",req.body);
      if(id){
         const data = await UserModel.find({_id:id})
-         data.length==0? res.send("更新失败!"):next()
+         data.length==0? res.send("更新失败!"):data[0].username=="admin"?res.send("超级管理员不能被修改"):next()
      }
-
 }
 
 export const verifyDelete=async (req,res,next)=>{

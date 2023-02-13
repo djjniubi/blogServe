@@ -27,7 +27,8 @@ const userService = {
       //修改用户
       userUpdate:async(req,res)=>{
         const {id,username,password} =req.body
-        await userController.userUpdate(id,username,password)
+        const {filename=""} =req.file
+        await userController.userUpdate(id,username,password,filename)
         res.send("更新成功")
       },
 
@@ -39,6 +40,13 @@ const userService = {
           code:200,
           data:data
         })
+      },
+
+      //获取用户列表
+      userList:async (req,res)=>{
+        const {pageNum,pageSize} =req.body
+        const data= await userController.userList(pageNum,pageSize)
+        res.json(data)
       }
 }
 
