@@ -7,6 +7,11 @@ const categoriesType={
     },
     categoriesCode:{
         type:String || Number,
-        required:true,
+        default:0,
     }
 }
+
+const schema = mongoose.Schema
+
+const categoriesModel=mongoose.model("categories",new schema(categoriesType))
+export default categoriesModel

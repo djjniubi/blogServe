@@ -27,6 +27,22 @@ const articleService={
         const {id}=req.params
         const data= await articleController.particulars(id)
         res.send(data)
+    },
+    //添加文章分类
+    addCategories:async (req,res)=>{
+        const data = await articleController.addCategories(req.body)
+        res.send(data)
+    },
+    //修改文章分类
+    categoriesUpdate:async (req,res)=>{
+        const data =await articleController.categoriesUpdate(req.body)
+        res.send(data)
+    },
+    //删除文章分类
+    categoriesDelete:async (req,res)=>{
+        const {id}=req.params
+        const data= await articleController.categoriesDelete(id)
+        res.send(data)
     }
 }
 
