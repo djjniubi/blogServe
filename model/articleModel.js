@@ -14,7 +14,8 @@ const articleType={
     creatorName:{type:String,required:true},
     creationTime:{type:String,required:true},
     modificationTime:{type:String,default:""},
-    postType:{type:String||Number,default:0}
+    postType:{type:String||Number,default:0},
+    state:{type:String||Number,default:0}
 }
 const schema =mongoose.Schema
 const ArticleMode=mongoose.model("article",new schema(articleType))

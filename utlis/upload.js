@@ -5,7 +5,7 @@ const storage = multer.diskStorage({
       cb(null, './public/upload')
     },
     filename:  (req, file, cb) =>{
-        // console.log("file",file);
+        console.log("file",file);
         const {originalname} = file
         const date= new Date()
         const timestamp = formatDate(date,"yyyy-mm-dd");

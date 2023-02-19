@@ -20,12 +20,15 @@ const userController = {
     const token = setToken();
     const data = await UserModel.find({ username: username });
     if (newpwd == data[0]?.password) {
-      const { _id, username, identity } = data[0];
+      const { _id, username, identity,avatar } = data[0];
       return {
         code: 200,
-        _id,
-        username,
-        identity,
+        userinfo:{
+            _id,
+           username,
+           identity,
+           avatar
+        },
         token: token,
       };
     }

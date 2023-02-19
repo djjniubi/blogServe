@@ -13,9 +13,10 @@ codeRouters.get('/captcha',  (req, res)=> {
       background: '#cc9966'
    });
     req.session.captcha=captcha.text.toLowerCase()
-    console.log("captcha",req.session["captcha"]);
+    captcha.text=captcha.text.toLowerCase()
+    console.log("captcha",req.session);
     res.type('svg');
-    res.status(200).send(captcha.data);
+    res.status(200).send(captcha);
 });
 //验证码
  codeRouters.get("/auth/:id",(req,res)=>{
