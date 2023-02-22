@@ -11,6 +11,7 @@ const userService = {
       },
       //用户登录
       login:async(req,res)=>{
+        console.log("登录",req.session,res.cookie);
         const {username,password}=req.body;
         const data = await userController.login(username,password)
         res.status(200).json(data)

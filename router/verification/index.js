@@ -4,7 +4,7 @@ import svgCaptcha from "svg-captcha"
 const codeRouters=express.Router()
 //获取验证码svg
 codeRouters.get('/captcha',  (req, res)=> {
-    console.log("header 获取验证码svg",req.headers);
+    // console.log("header 获取验证码svg",req.headers);
     var captcha = svgCaptcha.create({
       size:4,
       ignoreChars: '0o1i',

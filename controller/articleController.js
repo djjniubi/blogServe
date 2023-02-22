@@ -3,11 +3,11 @@ import categoriesModel from "../model/categoriesModel.js"
 const  articleController={
     //处理新增文章
     addArticle:async(queryDate)=>{
-        const {title,content,creatorName,creationTime,modificationTime,postType,state}=queryDate
+        const {title,content,promulgatorName,creationTime,modificationTime,postType,state}=queryDate
         ArticleMode.create({
             title,
             content,
-            creatorName,
+            promulgatorName,
             creationTime,
             modificationTime,
             postType,
