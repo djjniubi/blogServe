@@ -4,6 +4,7 @@ const  articleController={
     //处理新增文章
     addArticle:async(queryDate)=>{
         const {title,content,promulgatorName,creationTime,modificationTime,postType,state}=queryDate
+       try {
         ArticleMode.create({
             title,
             content,
@@ -17,6 +18,13 @@ const  articleController={
             code:200,
             msg:"新增文章成功"
         }
+       } catch (error) {
+         return{
+            code:500,
+            msg:"新增文章失败"
+         }
+       }
+       
     },
     //处理修改文章
     articleUpdate:async (queryDate)=>{
@@ -91,23 +99,33 @@ const  articleController={
         const {categoriesName,categoriesCode=""} =queryDate
         try {
             let lastCode = await categoriesModel.find().sort({categoriesCode: -1}).limit(1)
-            if(Array.isArray(lastPost)&&lastPost.length>0){
+            const las =new categoriesModel({
+                categoriesName:categoriesName,
+                categoriesCode:categoriesCode
+            })
+            if(Array.isArray(lastCode)&&lastCode.length>0){
                 lastCode = lastCode[0]
-                const las=new categoriesModel({
-                    categoriesName:categoriesName,
-                    categoriesCode:Number(lastCode["categoriesCode"])+1 
-                })
+                // const las=new categoriesModel({
+                //     categoriesName:categoriesName,
+                //     categoriesCode:Number(lastCode["categoriesCode"])+1 
+                // })
+                las.categoriesCode=Number(lastCode["categoriesCode"])+1 
+                const data=await  categoriesModel.create(las)
+                return {
+                  code:200,
+                  msg:`新增文章分类成功`
+              }
+            }else if(Array.isArray(lastCode) && lastCode.length === 0) {
+                las.categoriesCode = 0;
                 const data=await  categoriesModel.create(las)
                 return {
                   code:200,
                   msg:`新增文章分类成功`
               }
             }
-            if(Array.isArray(lastPost) && lastPost.length === 0) {
-                las.categoriesCode = 0;
-            }
          
         } catch (error) {
+            console.log("文章分类",error);
             return {
                 code:500,
                 msg:`新增文章分类失败`
@@ -144,6 +162,26 @@ const  articleController={
                 code:500,
                 msg:"删除失败"
             })
+          }
+    },
+    //处理文章分类列表
+    categoriesList:async (pageNum=1,pageSize=10)=>{
+        try {
+            const count=await categoriesModel.countDocuments()
+            const data =await categoriesModel.find().skip(pageSize * (pageNum-1)).limit(pageSize).sort("-createdAt2")
+            return {
+                code:200,
+                data,
+                msg:"获取文章分类列表成功",
+                total:count,
+                pageNum,
+                pageSize
+            }
+          } catch (error) {
+            return {
+                code:500,
+                msg:"获取文章分类列表失败"
+            }
           }
     }
 }

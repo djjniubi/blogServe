@@ -43,6 +43,12 @@ const articleService={
         const {id}=req.params
         const data= await articleController.categoriesDelete(id)
         res.send(data)
+    },
+    //文章分类列表
+    categoriesList:async (req,res)=>{
+        const {pageNum,pageSize}=req.body
+        const data= await articleController.categoriesList(pageNum,pageSize)
+        res.send(data)
     }
 }
 

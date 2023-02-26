@@ -14,6 +14,7 @@ codeRouters.get('/captcha',  (req, res)=> {
    });
     req.session.captcha=captcha.text.toLowerCase()
     captcha.text=captcha.text.toLowerCase()
+    captcha.code=200
     console.log("captcha",req.session);
     res.type('svg');
     res.status(200).send(captcha);
