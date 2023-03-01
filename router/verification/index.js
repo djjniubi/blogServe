@@ -21,9 +21,6 @@ codeRouters.get('/captcha',  (req, res)=> {
 });
 //验证码
  codeRouters.get("/auth/:id",(req,res)=>{
-    console.log("header 验证码",req.headers);
-    console.log("auth",req.params);
-    console.log("captcha2222",req.session);
     if(req.session["captcha"]==req.params["id"]){
         res.send({code:200,type:true,msg:"验证成功"})
     }else{

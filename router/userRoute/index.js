@@ -1,7 +1,7 @@
 import express from "express"
 import userService from "../../service/userService.js"
 //验证用户和密码是否为空
-import {verifyUserName,verifyPassword,verifyUserId,verifyUpdate,verifyDelete} from "../../middleware/user-middleware/index.js"
+import {verifyAuth,verifyUserName,verifyPassword,verifyUserId,verifyUpdate,verifyDelete} from "../../middleware/user-middleware/index.js"
 //验证token 是否过期
 import {VERIFY_TOKEN} from "../../middleware/verify-middleware/index.js"
 //上传头像
@@ -39,7 +39,7 @@ import upload from "../../utlis/upload.js"
  //注册新增用户api
  userRouters.post("/user/add",userService.addUser);
  //登录
- userRouters.post("/user/login",verifyUserName,verifyPassword,userService.login);
+ userRouters.post("/user/login",verifyAuth,verifyUserName,verifyPassword,userService.login);
 //获取用户信息
 userRouters.get("/user/info",VERIFY_TOKEN,verifyUserId,userService.userInfo);
 //修改用户信息

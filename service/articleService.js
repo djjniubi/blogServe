@@ -7,6 +7,7 @@ const articleService={
     },
     //修改文章
     articleUpdate:async (req,res)=>{
+        console.log("修改文章",req.body);
         const data =await articleController.articleUpdate(req.body)
         res.send(data)
     },
@@ -18,8 +19,7 @@ const articleService={
     },
     //文章列表
     articleList:async(req,res)=>{
-      const {pageNum,pageSize}=req.body
-      const data=await articleController.articleList(pageNum,pageSize)
+      const data=await articleController.articleList(req.query)
       res.send(data)
     },
     //文章详情

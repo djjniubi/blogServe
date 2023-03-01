@@ -1,4 +1,8 @@
 import UserModel from "../../model/userModel.js"
+export const verifyAuth=(req,res,next)=>{
+    const {captcha} = req.session
+    req.body["code"]!==captcha?res.send({code:404,message:"验证码错误"}):next()
+}
 export const verifyUserName=(req,res,next)=>{
       const {username}=req.body
       username?  next() : res.json({code:404,message:"请输入用户名"})

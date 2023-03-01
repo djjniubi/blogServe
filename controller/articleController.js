@@ -42,7 +42,7 @@ const  articleController={
                 }
          } catch (error) {
             return {
-                code:500,
+                code:404,
                 msg:`修改失败`
             }
          }
@@ -61,16 +61,20 @@ const  articleController={
             })
           } catch (error) {
             return ({
-                code:500,
+                code:404,
                 msg:"删除失败"
             })
           }
     },
     //处理文章列表
-    articleList:async(pageNum=1,pageSize=10)=>{
+    articleList:async(queryData)=>{
+      const {pageNum=1,pageSize=10,title,promulgatorName,postType,state} = queryData
+      console.log("queryData",queryData);
       try {
         const count=await ArticleMode.countDocuments()
-        const data =await ArticleMode.find().skip(pageSize * (pageNum-1)).limit(pageSize).sort("-createdAt2")
+        const data =await ArticleMode.find({}).skip(Number(pageSize) * (Number(pageNum)-1)).limit(pageSize).sort("-createdAt2")
+        console.log("data",data);
+        
         return {
             code:200,
             data,
@@ -81,7 +85,7 @@ const  articleController={
         }
       } catch (error) {
         return {
-            code:500,
+            code:404,
             msg:"获取文章列表失败"
         }
       }

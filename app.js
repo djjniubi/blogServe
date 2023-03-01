@@ -6,17 +6,17 @@ import session from "express-session"
 import {SESSION_KEY } from "./config/index.js"
 import path from "node:path"
 const cookiesConfigs = {
-   sameSite: 'None', 
+   // sameSite: 'None', 
    secure: false
 }
 const app=express()
-app.use(cors({
-   origin:"http://127.0.0.1:3000",
-   // allowedHeaders:'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
+// app.use(cors({
+//    origin:"http://127.0.0.1:3000",
+//    // allowedHeaders:'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
    
-   credentials: true,
-   optionsSuccessStatus:200,
-}))
+//    credentials: true,
+//    optionsSuccessStatus:200,
+// }))
 app.use("/public",express.static("./public"))
 //处理express 获取 req.body 
 app.use(express.urlencoded({extended:false}))
