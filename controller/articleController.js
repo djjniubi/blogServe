@@ -67,14 +67,13 @@ const  articleController={
           }
     },
     //处理文章列表
-    articleList:async(queryData)=>{
+    articleList:async(queryData,user)=>{
       const {pageNum=1,pageSize=10,title,promulgatorName,postType,state} = queryData
-      console.log("queryData",queryData);
+      const arr=["_id","title","content","promulgatorName","creationTime","modificationTime","postType","state"]
+      const queryObj={promulgatorName:user,title:{$exists:true},postType:{$exists:true},state:{$exists:true}}
       try {
-        const count=await ArticleMode.countDocuments()
-        const data =await ArticleMode.find({}).skip(Number(pageSize) * (Number(pageNum)-1)).limit(pageSize).sort("-createdAt2")
-        console.log("data",data);
-        
+        const count=await ArticleMode.find(queryObj).countDocuments()
+        const data =await ArticleMode.find(queryObj,arr).skip(Number(pageSize) * (Number(pageNum)-1)).limit(pageSize).sort("-createdAt2")
         return {
             code:200,
             data,

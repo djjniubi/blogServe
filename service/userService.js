@@ -14,8 +14,12 @@ const userService = {
         console.log("登录",req.session,res.cookie);
         const {username,password}=req.body;
         const data = await userController.login(username,password)
-        data["code"]==200?res.status(200).json(data): res.status(404).json(data)
-       
+        if(data["code"]==200){
+          req.session.username=data["userinfo"]["username"]
+          res.status(200).json(data)
+        }else{
+          res.status(404).json(data)
+        }
       },
       //获取用户信息
       userInfo:async(req,res)=>{

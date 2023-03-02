@@ -19,7 +19,8 @@ const articleService={
     },
     //文章列表
     articleList:async(req,res)=>{
-      const data=await articleController.articleList(req.query)
+        const user =req.session["username"]
+      const data=await articleController.articleList(req.query,user)
       res.send(data)
     },
     //文章详情
