@@ -18,7 +18,7 @@ const userService = {
           req.session.username=data["userinfo"]["username"]
           res.status(200).json(data)
         }else{
-          res.status(404).json(data)
+          res.status(400).json(data)
         }
       },
       //获取用户信息

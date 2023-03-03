@@ -1,5 +1,5 @@
 import ArticleMode from "../model/articleModel.js"
-import categoriesModel from "../model/categoriesModel.js"
+import {categoriesModel} from "../model/categoriesModel.js"
 const  articleController={
     //处理新增文章
     addArticle:async(queryDate)=>{
