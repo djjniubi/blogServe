@@ -28,14 +28,14 @@ const  articleController={
     },
     //处理修改文章
     articleUpdate:async (queryDate)=>{
-        const {id,title,content,creatorName,creationTime,modificationTime,postType}=queryDate
+        const {id,title,content,creatorName,creationTime,modificationTime,postType,state}=queryDate
          try {
             const data=await ArticleMode.updateOne({_id:id},{title,
                 content,
                 creatorName,
                 creationTime,
                 modificationTime,
-                postType})
+                postType,state})
                 return {
                     code:200,
                     msg:`修改成功${data["modifiedCount"]}条数据`
@@ -68,9 +68,11 @@ const  articleController={
     },
     //处理文章列表
     articleList:async(queryData,user)=>{
-      const {pageNum=1,pageSize=10,title,promulgatorName,postType,state} = queryData
+        console.log("处理文章列表",user);
+       const exists={$exists:true}
+      const {pageNum=1,pageSize=10,title,postType,state} = queryData
       const arr=["_id","title","content","promulgatorName","creationTime","modificationTime","postType","state"]
-      const queryObj={promulgatorName:user,title:{$exists:true},postType:{$exists:true},state:{$exists:true}}
+      const queryObj={promulgatorName:user,title:title?title:exists,postType:postType?postType:exists,state:state?state:exists}
       try {
         const count=await ArticleMode.find(queryObj).countDocuments()
         const data =await ArticleMode.find(queryObj,arr).skip(Number(pageSize) * (Number(pageNum)-1)).limit(pageSize).sort("-createdAt2")

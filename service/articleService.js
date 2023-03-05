@@ -19,7 +19,7 @@ const articleService={
     },
     //文章列表
     articleList:async(req,res)=>{
-        const user =req.session["username"]
+      const user =req.session["username"]
       const data=await articleController.articleList(req.query,user)
       res.send(data)
     },
